@@ -1,0 +1,39 @@
+{
+  "name": "Bob Multi-Tool",
+  "description": "Instant login and much more...",
+  "version": "0.1",
+  "manifest_version": 3,
+  "author": "Miki Ashkenazi",
+  "permissions": ["storage", "tabs", "activeTab"],
+  "content_scripts": [
+    {
+      "matches": ["https://app.hibob.com/*", "https://localhost.hibob.com/*", "https://app.stage.hibob.com/*"],
+      "js": ["content-script.js"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["images/okta.png"],
+      "matches": ["https://app.hibob.com/*", "https://localhost.hibob.com/*", "https://app.stage.hibob.com/*"]
+    }
+  ],
+  "action": {
+    "default_icon": {
+      "16": "assets/images/logo128.png",
+      "32": "assets/images/logo128.png",
+      "48": "assets/images/logo128.png",
+      "128": "assets/images/logo128.png"
+    },
+    "default_popup": "index.html",
+    "default_title": "Bob Multi-Tool"
+  },
+  "icons": {
+    "16": "assets/images/logo128.png",
+    "32": "assets/images/logo128.png",
+    "48": "assets/images/logo128.png",
+    "128": "assets/images/logo128.png"
+  }
+}

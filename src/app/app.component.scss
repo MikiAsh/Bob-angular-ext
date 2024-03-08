@@ -1,0 +1,51 @@
+.grid-container {
+  grid-template-rows: 60px auto;
+  grid-template-columns: 200px auto;
+  height: 100%;
+  display: grid;
+
+  > * {
+    border: 1px solid #000;
+    padding: 16px;
+  }
+}
+
+#grid-header {
+  font-size: 28px;
+}
+
+ul.main-menu {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.main-menu li {
+  cursor: pointer;
+  margin-bottom: 24px;
+}
+
+#toggle-list {
+  .toggle-list-container {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 24px;
+    margin-bottom: 6px;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li.toggle-item {
+    margin-top: 6px;
+    margin-bottom: 6px;
+    .delete-x {
+      cursor: pointer;
+      color: red;
+    }
+  }
+
+}
