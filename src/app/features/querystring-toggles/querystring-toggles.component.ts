@@ -12,4 +12,13 @@ import { Component } from '@angular/core';
 })
 export class QuerystringTogglesComponent {
 
+  async ngOnInit() {
+    const url = await this.getTabUrl();
+    console.log('tab', url);
+  }
+
+  private async getTabUrl(): Promise<string> {
+    const [tab] = await chrome.tabs.query({active: true, lastFocusedWindow: true});
+    return tab.url || '';
+  }
 }
