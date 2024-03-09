@@ -4,16 +4,36 @@
   </h3>
   <ul>
     <li *ngFor="let param of paramsObject.toggles">
-      <img src="../../../assets/images/delete.png" class="delete-img" (click)="deleteItem('toggles', param)">{{ param }}
+      <img src="../../../assets/images/delete.png"
+           class="action-img"
+           title="Delete"
+           (click)="deleteItem('toggles', param)">{{ param }}
     </li>
   </ul>
+  <div class="add-item-wrapper">
+    <img src="../../../assets/images/add.png"
+         class="action-img"
+         title="Add"
+         (click)="addItem('toggles', addToggle)">
+    <input type="text" #addToggle>
+  </div>
 </div>
 
 <h3>Remove Toggles</h3>
 <ul>
   <li *ngFor="let param of paramsObject.removeToggles">
-    <img src="../../../assets/images/delete.png" class="delete-img" (click)="deleteItem('removeToggles', param)">{{ param }}
+    <img src="../../../assets/images/delete.png"
+         class="action-img"
+         title="Delete"
+         (click)="deleteItem('removeToggles', param)">{{ param }}
   </li>
 </ul>
+<div class="add-item-wrapper">
+  <img src="../../../assets/images/add.png"
+       class="action-img"
+       title="Add"
+       (click)="addItem('removeToggles', removeToggle)">
+  <input type="text" #removeToggle>
+</div>
 
-<button type="button" (click)="updateUrl()">Update URL</button>
+<button type="button" class="update-url-btn" (click)="updateUrl()">Update URL</button>

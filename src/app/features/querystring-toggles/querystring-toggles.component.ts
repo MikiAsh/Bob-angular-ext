@@ -37,7 +37,7 @@ export class QuerystringTogglesComponent {
     url.searchParams.forEach((value, key) => {
       if (!QSTRING_PARAMS.includes(key)) return;
 
-      this.paramsObject[key as keyof QParams] = value.split(',');
+      this.paramsObject[key] = value.split(',');
     });
 
     return this.paramsObject;
@@ -49,10 +49,9 @@ export class QuerystringTogglesComponent {
 
   updateUrl(): void {
     const updatedUrl = new URL(this.tabUrl);
-    console.log('url', updatedUrl);
 
     Object.keys(this.paramsObject).forEach((key) => {
-      const valueArray = this.paramsObject[key as keyof QParams];
+      const valueArray = this.paramsObject[key];
 
       if (valueArray?.length > 0) {
         updatedUrl.searchParams.set(key, valueArray.join(','));
@@ -61,8 +60,13 @@ export class QuerystringTogglesComponent {
       }
     });
 
-    console.log('Updated URL', updatedUrl);
-
     chrome.tabs.update(undefined, { url: updatedUrl.toString() });
+  }
+
+  addItem(key: keyof QParams, inputElement: HTMLInputElement): void {
+    const value = inputElement.value;
+    if (value.trim() === '') return;
+    this.paramsObject[key].push(value);
+    inputElement.value = '';
   }
 }
