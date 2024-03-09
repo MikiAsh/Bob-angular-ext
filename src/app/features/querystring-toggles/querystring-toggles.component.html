@@ -1,1 +1,19 @@
-QString comp works
+<div [ngClass]="{ 'two-elements-margin': paramsObject.removeToggles }">
+  <h3>
+    Add Toggles
+  </h3>
+  <ul>
+    <li *ngFor="let param of paramsObject.toggles">
+      <img src="../../../assets/images/delete.png" class="delete-img" (click)="deleteItem('toggles', param)">{{ param }}
+    </li>
+  </ul>
+</div>
+
+<h3>Remove Toggles</h3>
+<ul>
+  <li *ngFor="let param of paramsObject.removeToggles">
+    <img src="../../../assets/images/delete.png" class="delete-img" (click)="deleteItem('removeToggles', param)">{{ param }}
+  </li>
+</ul>
+
+<button type="button" (click)="updateUrl()">Update URL</button>
