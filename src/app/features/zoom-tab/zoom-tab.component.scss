@@ -1,3 +1,12 @@
 :host {
   display: block;
 }
+
+input[type='number'] {
+  width: 40px;
+}
+
+.msg {
+  margin-top: 24px;
+  color: green;
+}
