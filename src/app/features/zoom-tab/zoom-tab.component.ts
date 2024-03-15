@@ -25,7 +25,7 @@ export class ZoomTabComponent implements AfterViewInit, OnInit {
   storageCloseDelay = 0;
 
   ngOnInit(): void {
-    this.activateAndsetStatusMessage();
+    this.setStatusMessage();
   }
 
   ngAfterViewInit() {
@@ -39,21 +39,16 @@ export class ZoomTabComponent implements AfterViewInit, OnInit {
     chrome.storage.sync.set({
       [MessageAction.ZoomDelaySeconds]: closeDelay
     }, () => {
-      this.activateAndsetStatusMessage();
+      this.setStatusMessage();
     });
   }
 
-  private activateAndsetStatusMessage(): void {
+  private setStatusMessage(): void {
     this.storageService.get(MessageAction.ZoomDelaySeconds).then((result) => {
       const res = result || 0;
       const displayText = res ? `${MESSAGES.enabled} ${res} seconds` : MESSAGES.disabled;
       this.delayInput.nativeElement.value = res;
       this.msgDiv.nativeElement.innerHTML = displayText;
-
-      chrome.runtime.sendMessage({
-        action: MessageAction.ZoomDelaySeconds,
-        zoomCloseDelaySeconds: res
-     });
     })
   }
 
