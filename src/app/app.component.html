@@ -6,11 +6,13 @@
       <li data-page="one-click-login"><a [routerLink]="'instant-login'">Instant login</a></li>
       <li data-page="url-toggles"><a [routerLink]="'qstring'">Add/Remove feature toggle from url</a></li>
       <li data-page="zoom-tab-closer"><a [routerLink]="'zoom-tab'">Close zoom tab after x seconds</a></li>
-      <li data-page="session-details"><a [routerLink]="'details'">Display company and/or user details. Accessible via local storage</a></li>
+      <li data-page="session-details"><a [routerLink]="'details'">Display Session</a></li>
       <li data-page="dark-mode"><a [routerLink]="'dark-mode'">Dark mode</a></li>
     </ul>
   </div>
   <div class="main-content">
+    <button type="button" (click)="logStorage()">Show Storage</button>
+    <button type="button" (click)="clearStorage()">Clear Storage</button>
     <router-outlet></router-outlet>
   </div>
 </div>

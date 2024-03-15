@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
 import { ChromeStorageService } from '../../services/storage.service';
-import { StorageAction } from '../../models/storage';
+import { MessageAction } from '../../models/model';
 
 const MESSAGES = {
   disabled: 'This feature is currently disabled. <br/>Set a number bigger than zero to activate it.',
@@ -37,22 +37,24 @@ export class ZoomTabComponent implements AfterViewInit, OnInit {
     if (closeDelay <= 0) closeDelay = 0
 
     chrome.storage.sync.set({
-      zoomCloseDelaySeconds: closeDelay
+      [MessageAction.ZoomDelaySeconds]: closeDelay
     }, () => {
       this.activateAndsetStatusMessage();
     });
   }
 
   private activateAndsetStatusMessage(): void {
-    this.storageService.get('zoomCloseDelaySeconds').then((result) => {
-      const displayText = result.toString() === '0' ? MESSAGES.disabled : `${MESSAGES.enabled} ${result} seconds`;
-      this.delayInput.nativeElement.value = result;
+    this.storageService.get(MessageAction.ZoomDelaySeconds).then((result) => {
+      const res = result || 0;
+      const displayText = res ? `${MESSAGES.enabled} ${res} seconds` : MESSAGES.disabled;
+      this.delayInput.nativeElement.value = res;
       this.msgDiv.nativeElement.innerHTML = displayText;
 
       chrome.runtime.sendMessage({
-        action: StorageAction.UpdateZoomCloseDelaySeconds,
-        zoomCloseDelaySeconds: result
+        action: MessageAction.ZoomDelaySeconds,
+        zoomCloseDelaySeconds: res
      });
     })
   }
+
 }
