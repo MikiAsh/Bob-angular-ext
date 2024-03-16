@@ -1,3 +1,7 @@
-Session Details comp works
-
-<pre>{{ sessionInfo }}</pre>
+<h1>{{ sessionInfo.company }}</h1>
+<h2>{{ sessionInfo.name }}</h2>
+<ul>
+  <li *ngIf="sessionInfo.email">{{sessionInfo.email}}</li>
+  <li *ngIf="sessionInfo.role">{{sessionInfo.role}}</li>
+  <li>{{sessionInfo.isManager ? 'is a manager' : 'is not a manager'}}</li>
+</ul>

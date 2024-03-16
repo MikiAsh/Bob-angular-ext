@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { MessageAction } from '../../models/model';
 
 @Component({
   selector: 'app-session-details',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [CommonModule],
   templateUrl: './session-details.component.html',
@@ -11,8 +12,14 @@ import { MessageAction } from '../../models/model';
 })
 export class SessionDetailsComponent implements OnInit {
 
+  private cdr = inject(ChangeDetectorRef);
   sessionInfo: {
     [key: string]: any;
+    company: string,
+    name: string,
+    email?: string,
+    isManager: boolean,
+    role: string,
   };
 
   ngOnInit(): void {
@@ -21,15 +28,16 @@ export class SessionDetailsComponent implements OnInit {
         tabs[0].id,
         { action: MessageAction.SessionInfoLocalStorage },
         (response) => {
-          this.processLocalStorageInfo(response);
+          response && this.processLocalStorageInfo(response);
         }
       );
     });
   }
 
   processLocalStorageInfo(info: string): void {
-    console.log('aaaaaaa', info);
-    this.sessionInfo = JSON.parse(info);
-    console.log('bbbbbb', this.sessionInfo);
+    const parsedInfo = JSON.parse(info);
+    this.sessionInfo = parsedInfo;
+    console.log('the info', this.sessionInfo);
+    this.cdr.detectChanges();
   }
 }
