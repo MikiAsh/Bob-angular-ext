@@ -2,6 +2,16 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { MessageAction } from '../../models/model';
 
+type LocalStorageInfo = {
+  [key: string]: any;
+  company: string,
+  name: string,
+  email?: string,
+  isManager: boolean,
+  role: string,
+  numericUserId: string
+};
+
 @Component({
   selector: 'app-session-details',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -13,14 +23,7 @@ import { MessageAction } from '../../models/model';
 export class SessionDetailsComponent implements OnInit {
 
   private cdr = inject(ChangeDetectorRef);
-  sessionInfo: {
-    [key: string]: any;
-    company: string,
-    name: string,
-    email?: string,
-    isManager: boolean,
-    role: string,
-  };
+  sessionInfo: LocalStorageInfo | null = null;
 
   ngOnInit(): void {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
@@ -28,16 +31,14 @@ export class SessionDetailsComponent implements OnInit {
         tabs[0].id,
         { action: MessageAction.SessionInfoLocalStorage },
         (response) => {
-          response && this.processLocalStorageInfo(response);
+          response && this.handleResponse(response);
         }
       );
     });
   }
 
-  processLocalStorageInfo(info: string): void {
-    const parsedInfo = JSON.parse(info);
-    this.sessionInfo = parsedInfo;
-    console.log('the info', this.sessionInfo);
+  handleResponse(info: LocalStorageInfo): void {
+    this.sessionInfo = info;
     this.cdr.detectChanges();
   }
 }
