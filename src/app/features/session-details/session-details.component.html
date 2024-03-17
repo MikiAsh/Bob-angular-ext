@@ -1,12 +1,11 @@
 <ng-container *ngIf="sessionInfo; else emptyState">
-  <h1>{{ sessionInfo.company }}</h1>
-  <h2>{{ sessionInfo.name }}</h2>
-  <ul>
-    <li *ngIf="sessionInfo.email">{{sessionInfo.email}}</li>
-    <li *ngIf="sessionInfo.numericUserId">{{sessionInfo.numericUserId}}</li>
-    <li *ngIf="sessionInfo.role">{{sessionInfo.role}}</li>
-    <li>{{sessionInfo.isManager ? 'is a manager' : 'is not a manager'}}</li>
-  </ul>
+  <div class="grid-container">
+    <div>Company name</div><div>{{ sessionInfo.company }}</div>
+    <div>User name</div><div>{{ sessionInfo.name }}</div>
+    <div>User id</div><div>{{sessionInfo.numericUserId}}</div>
+    <div>Role</div><div>{{sessionInfo.role}}</div>
+    <div>Is manager</div><div>{{sessionInfo.isManager ? 'True' : 'False'}}</div>
+  </div>
 </ng-container>
 
 <ng-template #emptyState>
