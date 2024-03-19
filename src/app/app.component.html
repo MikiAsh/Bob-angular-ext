@@ -1,17 +1,15 @@
-<div class="grid-container">
-  <div class="grid-corner">1</div>
-  <div class="grid-header"></div>
-  <div>
+<div class="flex-container">
+  <nav>
     <ul class="main-menu">
-      <li data-page="one-click-login"><a [routerLink]="'instant-login'">Instant login</a></li>
-      <li data-page="url-toggles"><a [routerLink]="'qstring'">Add/Remove feature toggle from url</a></li>
-      <li data-page="zoom-tab-closer"><a [routerLink]="'zoom-tab'">Close zoom tab after x seconds</a></li>
-      <li data-page="session-details"><a [routerLink]="'details'">Display Session</a></li>
+      <li data-page="one-click-login"><a [routerLink]="'instant-login'">One click login</a></li>
+      <li data-page="url-toggles"><a [routerLink]="'qstring'">Url feature toggles</a></li>
+      <li data-page="zoom-tab-closer"><a [routerLink]="'zoom-tab'">Close zoom tab</a></li>
+      <li data-page="session-details"><a [routerLink]="'details'">Session info</a></li>
     </ul>
-  </div>
-  <div class="main-content">
-    <!-- <button type="button" (click)="logStorage()">Show Storage</button>
-    <button type="button" (click)="clearStorage()">Clear Storage</button> -->
-    <router-outlet></router-outlet>
-  </div>
+  </nav>
+  <main class="main-content">
+      <!-- <button type="button" (click)="logStorage()">Show Storage</button>
+      <button type="button" (click)="clearStorage()">Clear Storage</button> -->
+      <router-outlet></router-outlet>
+  </main>
 </div>

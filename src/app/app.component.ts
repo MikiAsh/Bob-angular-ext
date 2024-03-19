@@ -1,5 +1,5 @@
-import { Component, inject } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Component, OnInit, inject } from '@angular/core';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { QuerystringTogglesComponent } from './features/querystring-toggles/querystring-toggles.component';
 import { ChromeStorageService } from './services/storage.service';
 
@@ -10,10 +10,15 @@ import { ChromeStorageService } from './services/storage.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   private storageService = inject(ChromeStorageService);
+  private router = inject(Router);
   title = 'angular_ext';
+
+  ngOnInit(): void {
+    this.redirectIfNotBob();
+  }
 
   logStorage(): void {
     this.storageService.get(null).then(res => console.dir(res));
@@ -22,5 +27,17 @@ export class AppComponent {
   clearStorage(): void {
     this.storageService.clear().then(() => console.dir(this.storageService.get(null)))
   }
+
+  private async redirectIfNotBob() {
+    const [tab] = await chrome.tabs.query({active: true, currentWindow: true});
+    const url = new URL(tab.url);
+    const domain = url.hostname;
+
+    if (!domain.includes('hibob.com')) {
+      this.router.navigate(['not-bob'])
+    }
+
+  }
 }
+
 

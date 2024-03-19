@@ -1,20 +1,47 @@
-.grid-container {
-  grid-template-rows: 60px auto;
-  grid-template-columns: 200px auto;
+:host {
+  display: block;
   height: 100%;
-  display: grid;
-
-  > * {
-    border: 1px solid #000;
-    padding: 16px;
-  }
 }
 
-.grid-header {
-  font-size: 28px;
+.flex-container {
+  display: flex;
+  height: 100%;
+}
+
+nav {
+  padding: 24px;
+  background-color: #121832;
+  color: #5b84a5;
+  max-width: 180px;
+}
+
+main {
+  flex-grow: 1;
+  padding: 24px;
+  background: linear-gradient(322deg, rgba(25,33,57,1) 0%, rgba(46,61,101,1) 58%, rgba(45,60,99,1) 87%);
 }
 
 .main-menu li {
   cursor: pointer;
   margin-bottom: 24px;
 }
+
+a {
+  text-decoration: none;
+  color: inherit;
+ }
+
+ a:visited {
+  text-decoration: none;
+  color: inherit;
+ }
+
+ a:hover {
+  text-decoration: none;
+  color: inherit;
+ }
+
+ a:active {
+  text-decoration: none;
+  color: inherit;
+ }
