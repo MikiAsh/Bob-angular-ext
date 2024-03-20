@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { Login } from '../../models/model';
 
 @Component({
   selector: 'app-instant-login',
@@ -10,4 +11,11 @@ import { Component } from '@angular/core';
   templateUrl: './instant-login.component.html',
   styleUrl: './instant-login.component.scss',
 })
-export class InstantLoginComponent { }
+export class InstantLoginComponent {
+  logins: Login[] = [];
+  oktaLogin: Partial<Login> = {
+    sort: 1,
+    name: 'Okta',
+    email: ''
+  };
+}

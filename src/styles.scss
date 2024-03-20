@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 html, body {
   height: 500px;
-  width: 700px;
+  width: 800px;
   margin: 0;
   font-size: 14px;
   color: #dadde2;
@@ -30,6 +30,11 @@ ul {
   padding: 7px 14px;
   font-size: 12px;
   border-radius: 6px;
+  cursor: pointer;
+
+  &:hover {
+    filter: drop-shadow(2px 4px 3px black) brightness(1.2);
+  }
 }
 
 input[type='text'], input[type='number'] {
@@ -43,4 +48,16 @@ input[type='text'], input[type='number'] {
 input[type='text']:focus, input[type='number'] {
   outline: 1px solid #4eb6ee;
   border-radius: 3px;
+}
+
+input::placeholder {
+  color: #7aa2b7;
+}
+
+.img {
+  cursor: pointer;
+
+  &:hover{
+    filter: drop-shadow(2px 4px 3px black) brightness(1.5);
+  }
 }

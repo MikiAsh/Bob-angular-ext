@@ -5,14 +5,15 @@
   <ul>
     <li *ngFor="let param of paramsObject.toggles">
       <img src="../../../assets/images/delete.png"
-           class="action-img"
+           class="action-img img"
+           style="vertical-align: middle;"
            title="Delete"
            (click)="deleteItem('toggles', param)">{{ param }}
     </li>
   </ul>
   <div class="add-item-wrapper">
     <img src="../../../assets/images/add.png"
-         class="action-img"
+         class="action-img img"
          title="Add"
          (click)="addItem('toggles', addToggle)">
     <input type="text" #addToggle>
@@ -23,14 +24,14 @@
 <ul>
   <li *ngFor="let param of paramsObject.removeToggles">
     <img src="../../../assets/images/delete.png"
-         class="action-img"
+         class="action-img img"
          title="Delete"
          (click)="deleteItem('removeToggles', param)">{{ param }}
   </li>
 </ul>
 <div class="add-item-wrapper">
   <img src="../../../assets/images/add.png"
-       class="action-img"
+       class="action-img img"
        title="Add"
        (click)="addItem('removeToggles', removeToggle)">
   <input type="text" #removeToggle>

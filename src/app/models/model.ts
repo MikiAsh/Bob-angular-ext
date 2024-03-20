@@ -15,5 +15,12 @@ export enum StorageActions {
 
 }
 
+export interface Login {
+  sort: number,
+  name: string,
+  email: string,
+  password: string,
+}
+
 
 

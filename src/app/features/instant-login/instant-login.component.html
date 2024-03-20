@@ -1,1 +1,46 @@
-Instant Login works
+<form name="logins-form" class="grid-container">
+  <div>Name</div><div>Email</div><div>Password</div><div></div>
+
+  <!-- Okta -->
+  <div><input type="text" name="loginName" disabled [value]="oktaLogin.name"></div>
+  <div><input type="text" name="loginEmail" [value]="oktaLogin.email"></div>
+  <div>
+    <img src="../../../assets/images/okta.png"
+      title="Okta"
+      (click)="null"></div>
+  <div class="row-actions-cell">
+    <!-- <img src="../../../assets/images/delete.png"
+      title="Delete"
+      class="img"
+      (click)="null"> -->
+  </div>
+
+  <!-- User logins -->
+  <div><input type="text" name="loginName" value=""></div>
+  <div><input type="text" name="loginEmail"></div>
+  <div><input type="text" name="loginPassword"></div>
+  <div class="row-actions-cell">
+    <img src="../../../assets/images/delete.png"
+      title="Delete"
+      class="img"
+      (click)="null">
+  </div>
+
+  <!-- Add new entry line -->
+  <div>
+    <input type="text" name="loginName" placeholder="Display label">
+  </div>
+  <div>
+    <input type="text" name="loginEmail" placeholder="Login email">
+  </div>
+  <div>
+    <input type="text" name="loginPassword" placeholder="password">
+  </div>
+  <div class="row-actions-cell">
+    <img src="../../../assets/images/add.png"
+      class="action-img"
+      title="Add"
+      class="img"
+      (click)="null">
+  </div>
+</form>
