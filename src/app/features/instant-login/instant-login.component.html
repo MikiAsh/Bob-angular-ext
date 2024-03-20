@@ -1,9 +1,9 @@
-<form name="logins-form" class="grid-container">
+<form [formGroup]="loginsForm" (ngSubmit)="onSubmit()" class="grid-container">
   <div>Name</div><div>Email</div><div>Password</div><div></div>
 
   <!-- Okta -->
-  <div><input type="text" name="loginName" disabled [value]="oktaLogin.name"></div>
-  <div><input type="text" name="loginEmail" [value]="oktaLogin.email"></div>
+  <div><input type="text" formControlName="oktaLoginName"></div>
+  <div><input type="text" formControlName="oktaLoginEmail"></div>
   <div>
     <img src="../../../assets/images/okta.png"
       title="Okta"
@@ -16,9 +16,9 @@
   </div>
 
   <!-- User logins -->
-  <div><input type="text" name="loginName" value=""></div>
-  <div><input type="text" name="loginEmail"></div>
-  <div><input type="text" name="loginPassword"></div>
+  <div><input type="text" formControlName="userLoginName"></div>
+  <div><input type="text" formControlName="userLoginEmail"></div>
+  <div><input type="text" formControlName="userLoginPassword"></div>
   <div class="row-actions-cell">
     <img src="../../../assets/images/delete.png"
       title="Delete"
@@ -28,19 +28,24 @@
 
   <!-- Add new entry line -->
   <div>
-    <input type="text" name="loginName" placeholder="Display label">
+    <input type="text" formControlName="newUserLoginName" placeholder="Display label"
+    [class.validation-error]="loginsForm.controls['newUserLoginName'].invalid && loginsForm.controls['newUserLoginName'].touched">
   </div>
   <div>
-    <input type="text" name="loginEmail" placeholder="Login email">
+    <input type="text" formControlName="newUserLoginEmail" placeholder="Login email"
+    [class.validation-error]="loginsForm.controls['newUserLoginEmail'].invalid && loginsForm.controls['newUserLoginEmail'].touched">
   </div>
   <div>
-    <input type="text" name="loginPassword" placeholder="password">
+    <input type="text" formControlName="newUserLoginPassword" placeholder="password"
+    [class.validation-error]="loginsForm.controls['newUserLoginPassword'].invalid && loginsForm.controls['newUserLoginPassword'].touched">
   </div>
   <div class="row-actions-cell">
     <img src="../../../assets/images/add.png"
       class="action-img"
       title="Add"
       class="img"
-      (click)="null">
+      (click)="addEntry()">
   </div>
+
+  <button type="submit" class="btn">Submit</button>
 </form>

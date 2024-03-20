@@ -22,6 +22,10 @@ input[name='email'] {
   width: 170px
 }
 
+.validation-error {
+  border: 1px solid red;
+}
+
 .row-actions-cell {
   align-self: center;
 }
