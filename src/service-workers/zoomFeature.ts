@@ -1,14 +1,14 @@
-import { MessageAction } from '../app/models/model';
+import { StorageActions } from '../app/models/model';
 
 export const initZoomFeature = () => {
   const ZOOM_URL = 'https://hibob.zoom.us/';
 
   // Onload, see if user have value in the storage
-  chrome.storage.sync.get(MessageAction.ZoomDelaySeconds, (res) => {
+  chrome.storage.sync.get(StorageActions.ZoomDelaySeconds, (res) => {
     let zoomCloseDelaySeconds: number | null = null;
 
     if (res) {
-      zoomCloseDelaySeconds = res[MessageAction.ZoomDelaySeconds];
+      zoomCloseDelaySeconds = res[StorageActions.ZoomDelaySeconds];
       enableFeature(zoomCloseDelaySeconds);
     } else listenForStorageChange(zoomCloseDelaySeconds);
   });
@@ -16,7 +16,7 @@ export const initZoomFeature = () => {
   const listenForStorageChange = (zoomCloseDelaySeconds) => {
     chrome.storage.onChanged.addListener((changes, namespace) => {
       for (let key in changes) {
-        if (key === MessageAction.ZoomDelaySeconds) {
+        if (key === StorageActions.ZoomDelaySeconds) {
           enableFeature(zoomCloseDelaySeconds);
         }
       }

@@ -7,7 +7,7 @@
   grid-template-columns: repeat(3, auto) 1fr;
   height: 100%;
   display: grid;
-  gap: 10px;
+  gap: 12px;
 }
 
 input[name='name']{
@@ -28,5 +28,9 @@ input[name='email'] {
 
 .row-actions-cell {
   align-self: center;
+}
+
+.margin-top {
+  margin-top: 15px;
 }
 

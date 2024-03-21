@@ -22,11 +22,35 @@ export class ChromeStorageService {
 
   set(items: { [key: string]: any }): Promise<void> {
     return new Promise((resolve, reject) => {
-      chrome.storage.sync.set(items, () => {
+      chrome.storage.sync.get(Object.keys(items), (existingItems) => {
         if (chrome.runtime.lastError) {
           reject(chrome.runtime.lastError);
+          return;
+        }
+
+        const keysToRemove = Object.keys(existingItems);
+        const performSetOperation = () => {
+          chrome.storage.sync.set(items, () => {
+            if (chrome.runtime.lastError) {
+              reject(chrome.runtime.lastError);
+            } else {
+              resolve();
+            }
+          });
+        };
+
+        if (keysToRemove.length > 0) {
+          // Remove existing key(s) before setting new ones
+          chrome.storage.sync.remove(keysToRemove, () => {
+            if (chrome.runtime.lastError) {
+              reject(chrome.runtime.lastError);
+              return;
+            }
+            performSetOperation();
+          });
         } else {
-          resolve();
+          // Directly set new key(s) if there are no existing keys to remove
+          performSetOperation();
         }
       });
     });

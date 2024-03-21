@@ -1,4 +1,4 @@
-<form [formGroup]="loginsForm" (ngSubmit)="onSubmit()" class="grid-container">
+<form [formGroup]="topForm" (ngSubmit)="onSubmit()" class="grid-container">
   <div>Name</div><div>Email</div><div>Password</div><div></div>
 
   <!-- Okta -->
@@ -16,36 +16,44 @@
   </div>
 
   <!-- User logins -->
-  <div><input type="text" formControlName="userLoginName"></div>
-  <div><input type="text" formControlName="userLoginEmail"></div>
-  <div><input type="text" formControlName="userLoginPassword"></div>
-  <div class="row-actions-cell">
-    <img src="../../../assets/images/delete.png"
-      title="Delete"
-      class="img"
-      (click)="null">
-  </div>
+  <ng-container formArrayName="userLogins" >
+  <ng-container *ngFor="let login of userLogins.controls; let i = index" [formGroupName]="i">
+    <div><input type="text" formControlName="userLoginName"></div>
+    <div><input type="text" formControlName="userLoginEmail"></div>
+    <div><input type="text" formControlName="userLoginPassword"></div>
+    <div class="row-actions-cell">
+      <img src="../../../assets/images/delete.png"
+        title="Delete"
+        class="img"
+        (click)="deleteEntry(i)">
+    </div>
+  </ng-container>
+  </ng-container>
 
   <!-- Add new entry line -->
-  <div>
-    <input type="text" formControlName="newUserLoginName" placeholder="Display label"
-    [class.validation-error]="loginsForm.controls['newUserLoginName'].invalid && loginsForm.controls['newUserLoginName'].touched">
-  </div>
-  <div>
-    <input type="text" formControlName="newUserLoginEmail" placeholder="Login email"
-    [class.validation-error]="loginsForm.controls['newUserLoginEmail'].invalid && loginsForm.controls['newUserLoginEmail'].touched">
-  </div>
-  <div>
-    <input type="text" formControlName="newUserLoginPassword" placeholder="password"
-    [class.validation-error]="loginsForm.controls['newUserLoginPassword'].invalid && loginsForm.controls['newUserLoginPassword'].touched">
-  </div>
-  <div class="row-actions-cell">
-    <img src="../../../assets/images/add.png"
-      class="action-img"
-      title="Add"
-      class="img"
-      (click)="addEntry()">
-  </div>
+  <ng-container formGroupName="newLine">
+    <div>
+      <input type="text" formControlName="newUserLoginName" placeholder="Display label"
+      [class.validation-error]="newLineGroup.controls['newUserLoginName'].invalid && newLineGroup.controls['newUserLoginName'].touched">
+    </div>
+    <div>
+      <input type="text" formControlName="newUserLoginEmail" placeholder="Login email"
+      [class.validation-error]="newLineGroup.controls['newUserLoginEmail'].invalid && newLineGroup.controls['newUserLoginEmail'].touched">
+    </div>
+    <div>
+      <input type="text" formControlName="newUserLoginPassword" placeholder="password"
+      [class.validation-error]="newLineGroup.controls['newUserLoginPassword'].invalid && newLineGroup.controls['newUserLoginPassword'].touched">
+    </div>
+    <div class="row-actions-cell">
+      <img src="../../../assets/images/add.png"
+        class="action-img"
+        title="Add"
+        class="img"
+        (click)="addEntry()">
+    </div>
+  </ng-container>
 
-  <button type="submit" class="btn">Submit</button>
+  <button type="submit" class="btn margin-top">Save</button>
+  <div class="margin-top"></div> <!-- necessary for grid layout -->
+  <div class="margin-top" style="align-self: center">Enable feature <input type="checkbox" formControlName="featureEnabled"></div>
 </form>
