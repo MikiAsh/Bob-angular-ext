@@ -15,5 +15,7 @@ export interface Login {
   password: string,
 }
 
+export const appName = 'Bob-multitool-extension';
+
 
 

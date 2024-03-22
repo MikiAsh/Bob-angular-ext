@@ -17,7 +17,7 @@
 
   <!-- User logins -->
   <ng-container formArrayName="userLogins" >
-  <ng-container *ngFor="let login of userLogins.controls; let i = index" [formGroupName]="i">
+  <ng-container *ngFor="let login of userLogins.controls; let i = index; trackBy: trackByFn" [formGroupName]="i">
     <div><input type="text" formControlName="userLoginName"></div>
     <div><input type="text" formControlName="userLoginEmail"></div>
     <div><input type="text" formControlName="userLoginPassword"></div>

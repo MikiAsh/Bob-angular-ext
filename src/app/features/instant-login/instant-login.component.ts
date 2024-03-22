@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { Login, StorageActions } from '../../models/model';
+import { Login, StorageActions, appName } from '../../models/model';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ChromeStorageService } from '../../services/storage.service';
@@ -20,9 +20,7 @@ export class InstantLoginComponent implements OnInit {
   private fb = inject(FormBuilder);
   private storageService = inject(ChromeStorageService);
 
-  // loginsForm: FormGroup;
   topForm: FormGroup;
-  // logins: Login[] = [];
   oktaLogin: Partial<Login> = {
     name: 'Okta',
     email: ''
@@ -59,6 +57,14 @@ export class InstantLoginComponent implements OnInit {
       const storedLogins = storageData?.['userLogins'] || [];
       this.userLogins.clear();
 
+      const storedFeatureEnabled = storageData?.['featureEnabled'] || '';
+      const storedOktaLoginEmail = storageData?.['oktaLoginEmail'] || '';
+
+      this.topForm.patchValue({
+        featureEnabled: storedFeatureEnabled,
+        oktaLoginEmail: storedOktaLoginEmail,
+      });
+
       storedLogins.forEach((login: any) => {
         const loginFormGroup = this.fb.group({
           sort: [login.sort, Validators.required],
@@ -69,7 +75,7 @@ export class InstantLoginComponent implements OnInit {
         this.userLogins.push(loginFormGroup);
       });
     } catch (error) {
-      console.error('Failed to load user logins from storage:', error);
+      console.error(appName, 'Failed to load user logins from storage:', error);
     }
   }
 
@@ -103,7 +109,11 @@ export class InstantLoginComponent implements OnInit {
     })
     .catch((error) => {
       alert('Failed to save data');
-      console.error('Failed to save data:', error);
+      console.error(appName, 'Failed to save data:', error);
     });
+  }
+
+  trackByFn(index: number, item: any): string {
+    return item.value.userLoginEmail;
   }
 }

@@ -14,12 +14,6 @@
   "background": {
     "service_worker": "background.js"
   },
-  "web_accessible_resources": [
-    {
-      "resources": ["images/okta.png"],
-      "matches": ["https://app.hibob.com/*", "https://localhost.hibob.com/*", "https://app.stage.hibob.com/*"]
-    }
-  ],
   "action": {
     "default_icon": {
       "16": "assets/images/logo128.png",
