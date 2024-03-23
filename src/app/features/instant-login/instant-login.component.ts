@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject } from '@angular/core';
-import { Login, StorageActions, appName } from '../../models/model';
+import { StorageActions, appName } from '../../models/model';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ChromeStorageService } from '../../services/storage.service';
@@ -21,10 +21,6 @@ export class InstantLoginComponent implements OnInit {
   private storageService = inject(ChromeStorageService);
 
   topForm: FormGroup;
-  oktaLogin: Partial<Login> = {
-    name: 'Okta',
-    email: ''
-  };
 
   ngOnInit() {
     this.topForm = this.fb.group({
@@ -53,7 +49,6 @@ export class InstantLoginComponent implements OnInit {
   async populateUserLoginsFromStorage(): Promise<void> {
     try {
       const storageData = await this.storageService.get(StorageActions.InstantLogin);
-      console.log('storageData', storageData);
       const storedLogins = storageData?.['userLogins'] || [];
       this.userLogins.clear();
 

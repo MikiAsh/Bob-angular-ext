@@ -4,7 +4,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build && npm run build-scss",
+    "build-scss": "sass src/content-script.scss dist/angular_ext/content-script.css --no-source-map",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },

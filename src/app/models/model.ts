@@ -1,3 +1,4 @@
+export const appName = 'Bob-multitool-extension';
 
 export enum MessageAction {
   SessionInfoLocalStorage = 'SessionInfoLocalStorage',
@@ -8,14 +9,23 @@ export enum StorageActions {
   InstantLogin = 'InstantLogin'
 }
 
-export interface Login {
-  sort: number,
-  name: string,
-  email: string,
-  password: string,
+export interface StorageLoginEntry {
+  [StorageActions.InstantLogin]: Login,
 }
 
-export const appName = 'Bob-multitool-extension';
+export interface Login {
+  featureEnabled: boolean,
+  oktaLoginEmail: string,
+  userLogins: UserLogin[],
+}
+
+export interface UserLogin {
+  sort: number,
+  userLoginEmail: string,
+  userLoginName: string,
+  userLoginPassword: string,
+}
+
 
 
 
