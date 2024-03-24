@@ -20,10 +20,12 @@ export class AppComponent implements OnInit {
     this.redirectIfNotBob();
   }
 
+  // for debugging only
   logStorage(): void {
     this.storageService.get(null).then(res => console.dir(res));
   }
 
+  // for debugging only
   clearStorage(): void {
     this.storageService.clear().then(() => console.dir(this.storageService.get(null)))
   }
