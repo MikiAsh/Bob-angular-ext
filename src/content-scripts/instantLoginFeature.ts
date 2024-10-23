@@ -10,6 +10,7 @@ export const initInstantLoginFeature = () => {
 }
 
 const start = async () => {
+  if (!document.querySelector(SelectElement.LoginApp)) return;
   const extensionRect = document.createElement("div");
   extensionRect.id = "bob-multi-tool";
   const storageData = await chrome.storage.sync.get(StorageActions.InstantLogin);

@@ -6,7 +6,8 @@ export enum MessageAction {
 
 export enum StorageActions {
   ZoomDelaySeconds = 'ZoomDelaySeconds',
-  InstantLogin = 'InstantLogin'
+  InstantLogin = 'InstantLogin',
+  UrlToggles = 'UrlToggles'
 }
 
 export interface StorageLoginEntry {
@@ -25,6 +26,10 @@ export interface UserLogin {
   userLoginName: string,
   userLoginPassword: string,
 }
+
+export type QParams = { toggles?: string[], removeToggles?: string[] };
+export type TogglesHistory = QParams;
+
 
 
 
